@@ -46,7 +46,7 @@ $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
 /**
  * Fires after comment cookies are set.
  *
- * @since 3.4.0
+ * @since 3.4.0WordPress Address 
  * @since 4.9.6 The `$cookies_consent` parameter was added.
  *
  * @param WP_Comment $comment         Comment object.

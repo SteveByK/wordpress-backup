@@ -2553,7 +2553,7 @@ function comment_form( $args = array(), $post = null ) {
 			),
 			sprintf(
 				'<input id="url" name="tel" %s value="%s" size="30" maxlength="200" autocomplete="tel"%s />',
-				( $html5 ? 'type="text"' : 'type="text"' ),
+				( $html5 ? 'type="url"' : 'type="text"' ),
 				esc_attr( $commenter['comment_author_tel'] )
 			)
 		),
