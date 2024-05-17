@@ -1902,7 +1902,12 @@ function wp_get_current_commenter() {
 	if ( isset( $_COOKIE[ 'comment_author_url_' . COOKIEHASH ] ) ) {
 		$comment_author_url = $_COOKIE[ 'comment_author_url_' . COOKIEHASH ];
 	}
-
+	//20240517 add comment新規入力エリア　start
+	$comment_author_tel = '';
+	if ( isset( $_COOKIE[ 'comment_author_tel_' . COOKIEHASH ] ) ) {
+		$comment_author_tel = $_COOKIE[ 'comment_author_tel_' . COOKIEHASH ];
+	}
+	//20240517 add comment新規入力エリア  end
 	/**
 	 * Filters the current commenter's name, email, and URL.
 	 *
@@ -1916,7 +1921,8 @@ function wp_get_current_commenter() {
 	 *     @type string $comment_author_url   The URL address of the current commenter, or an empty string.
 	 * }
 	 */
-	return apply_filters( 'wp_get_current_commenter', compact( 'comment_author', 'comment_author_email', 'comment_author_url' ) );
+	//return apply_filters( 'wp_get_current_commenter', compact( 'comment_author', 'comment_author_email', 'comment_author_url' ) );
+	return apply_filters( 'wp_get_current_commenter', compact( 'comment_author', 'comment_author_email', 'comment_author_url', 'comment_author_tel' ) );
 }
 
 /**

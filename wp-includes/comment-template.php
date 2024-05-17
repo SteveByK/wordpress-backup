@@ -2544,6 +2544,20 @@ function comment_form( $args = array(), $post = null ) {
 				esc_attr( $commenter['comment_author_url'] )
 			)
 		),
+		//20240517新規入力　電話番号start
+		'tel'    => sprintf(
+			'<p class="comment-form-tel">%s %s</p>',
+			sprintf(
+				'<label for="tel">%s</label>',
+				__( 'tel' )
+			),
+			sprintf(
+				'<input id="url" name="tel" %s value="%s" size="30" maxlength="200" autocomplete="tel"%s />',
+				( $html5 ? 'type="text"' : 'type="text"' ),
+				esc_attr( $commenter['comment_author_tel'] )
+			)
+		),
+		//20240517新規入力　電話番号end
 	);
 
 	if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
