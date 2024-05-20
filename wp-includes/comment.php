@@ -36,7 +36,8 @@
  *                             trackback, or pingback.
  * @return bool If all checks pass, true, otherwise false.
  */
-function check_comment( $author, $email, $url, $comment, $user_ip, $user_agent, $comment_type ) {
+//function check_comment( $author, $email, $url, $comment, $user_ip, $user_agent, $comment_type ) {
+	function check_comment( $author, $email, $url, $tel,$comment, $user_ip, $user_agent, $comment_type ) {
 	global $wpdb;
 
 	// If manual moderation is enabled, skip all checks and return false.
@@ -105,6 +106,10 @@ function check_comment( $author, $email, $url, $comment, $user_ip, $user_agent, 
 				return false;
 			}
 			if ( preg_match( $pattern, $url ) ) {
+				return false;
+			}
+			//tek check
+			if ( preg_match( $pattern, $tel ) ) {
 				return false;
 			}
 			if ( preg_match( $pattern, $comment ) ) {
@@ -792,6 +797,7 @@ function wp_allow_comment( $commentdata, $wp_error = false ) {
 			$commentdata['comment_author'],
 			$commentdata['comment_author_email'],
 			$commentdata['comment_author_url'],
+			$commentdata['comment_author_tel'], //tel check
 			$commentdata['comment_content'],
 			$commentdata['comment_author_IP'],
 			$commentdata['comment_agent'],
@@ -806,6 +812,7 @@ function wp_allow_comment( $commentdata, $wp_error = false ) {
 			$commentdata['comment_author'],
 			$commentdata['comment_author_email'],
 			$commentdata['comment_author_url'],
+			$commentdata['comment_author_tel'], //tel check
 			$commentdata['comment_content'],
 			$commentdata['comment_author_IP'],
 			$commentdata['comment_agent']
@@ -1284,6 +1291,10 @@ function wp_check_comment_data_max_lengths( $comment_data ) {
 	if ( isset( $comment_data['comment_author_url'] ) && strlen( $comment_data['comment_author_url'] ) > $max_lengths['comment_author_url'] ) {
 		return new WP_Error( 'comment_author_url_column_length', __( '<strong>Error:</strong> Your URL is too long.' ), 200 );
 	}
+	//tel add error message about lens check
+	if ( isset( $comment_data['comment_author_tel'] ) && strlen( $comment_data['comment_author_tel'] ) > $max_lengths['comment_author_tel'] ) {
+		return new WP_Error( 'comment_author_url_column_length', __( '<strong>Error:</strong> Your telephone is too long.' ), 200 );
+	}
 
 	if ( isset( $comment_data['comment_content'] ) && mb_strlen( $comment_data['comment_content'], '8bit' ) > $max_lengths['comment_content'] ) {
 		return new WP_Error( 'comment_content_column_length', __( '<strong>Error:</strong> Your comment is too long.' ), 200 );
@@ -1305,7 +1316,9 @@ function wp_check_comment_data_max_lengths( $comment_data ) {
  * @param string $user_agent The author's browser user agent
  * @return bool True if comment contains disallowed content, false if comment does not
  */
-function wp_check_comment_disallowed_list( $author, $email, $url, $comment, $user_ip, $user_agent ) {
+//function wp_check_comment_disallowed_list( $author, $email, $url, $comment, $user_ip, $user_agent ) {
+	//$tel add 
+	function wp_check_comment_disallowed_list( $author, $email, $url, $tel, $comment, $user_ip, $user_agent ) {
 	/**
 	 * Fires before the comment is tested for disallowed characters or words.
 	 *
@@ -1321,7 +1334,8 @@ function wp_check_comment_disallowed_list( $author, $email, $url, $comment, $use
 	 */
 	do_action_deprecated(
 		'wp_blacklist_check',
-		array( $author, $email, $url, $comment, $user_ip, $user_agent ),
+		//array( $author, $email, $url, $comment, $user_ip, $user_agent ),
+		array( $author, $email, $url, $tel, $comment, $user_ip, $user_agent ),
 		'5.5.0',
 		'wp_check_comment_disallowed_list',
 		__( 'Please consider writing more inclusive code.' )
@@ -1339,7 +1353,8 @@ function wp_check_comment_disallowed_list( $author, $email, $url, $comment, $use
 	 * @param string $user_ip    Comment author's IP address.
 	 * @param string $user_agent Comment author's browser user agent.
 	 */
-	do_action( 'wp_check_comment_disallowed_list', $author, $email, $url, $comment, $user_ip, $user_agent );
+	//do_action( 'wp_check_comment_disallowed_list', $author, $email, $url, $comment, $user_ip, $user_agent );
+	do_action( 'wp_check_comment_disallowed_list', $author, $email, $url, $tel, $comment, $user_ip, $user_agent );
 
 	$mod_keys = trim( get_option( 'disallowed_keys' ) );
 	if ( '' === $mod_keys ) {
@@ -1365,6 +1380,8 @@ function wp_check_comment_disallowed_list( $author, $email, $url, $comment, $use
 		if ( preg_match( $pattern, $author )
 			|| preg_match( $pattern, $email )
 			|| preg_match( $pattern, $url )
+			//tel add
+			|| preg_match( $pattern, $tel )
 			|| preg_match( $pattern, $comment )
 			|| preg_match( $pattern, $comment_without_html )
 			|| preg_match( $pattern, $user_ip )
@@ -3470,6 +3487,7 @@ function wp_handle_comment_submission( $comment_data ) {
 	$comment_author       = '';
 	$comment_author_email = '';
 	$comment_author_url   = '';
+	$comment_author_tel   = ''; //tel add
 	$comment_content      = '';
 	$comment_parent       = 0;
 	$user_id              = 0;

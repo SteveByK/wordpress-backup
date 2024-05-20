@@ -2552,7 +2552,7 @@ function comment_form( $args = array(), $post = null ) {
 				__( 'telephone' )
 			),
 			sprintf(
-				'<input id="tel" name="tel" %s value="%s" size="30" maxlength="200" autocomplete="0"%s />',
+				'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
 				( $html5 ? 'type="tel"' : 'type="text"' ),
 				esc_attr( $commenter['comment_author_tel'] )
 			)
