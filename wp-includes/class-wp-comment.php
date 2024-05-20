@@ -59,6 +59,8 @@ final class WP_Comment {
 	 */
 	public $comment_author_url = '';
 
+	//tel add新規
+	public $comment_author_tel = '';
 	/**
 	 * Comment author IP address (IPv4 format).
 	 *
