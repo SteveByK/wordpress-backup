@@ -1374,6 +1374,8 @@ function wp_ajax_replyto_comment( $action ) {
 		'comment_author',
 		'comment_author_email',
 		'comment_author_url',
+		//新規入力tel
+		'comment_author_tel',
 		'comment_content',
 		'comment_type',
 		'comment_parent',

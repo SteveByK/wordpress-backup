@@ -2549,11 +2549,11 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-form-tel">%s %s</p>',
 			sprintf(
 				'<label for="tel">%s</label>',
-				__( 'tel' )
+				__( 'telephone' )
 			),
 			sprintf(
-				'<input id="url" name="tel" %s value="%s" size="30" maxlength="200" autocomplete="tel"%s />',
-				( $html5 ? 'type="url"' : 'type="text"' ),
+				'<input id="tel" name="tel" %s value="%s" size="30" maxlength="200" autocomplete="0"%s />',
+				( $html5 ? 'type="tel"' : 'type="text"' ),
 				esc_attr( $commenter['comment_author_tel'] )
 			)
 		),
