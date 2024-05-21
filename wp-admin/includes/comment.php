@@ -64,6 +64,11 @@ function edit_comment() {
 	if ( isset( $_POST['newcomment_author_url'] ) ) {
 		$_POST['comment_author_url'] = $_POST['newcomment_author_url'];
 	}
+	//tel 
+	if ( isset( $_POST['newcomment_author_tel'] ) ) {
+		$_POST['comment_author_tel'] = $_POST['newcomment_author_tel'];
+	}
+	//tel 
 	if ( isset( $_POST['comment_status'] ) ) {
 		$_POST['comment_approved'] = $_POST['comment_status'];
 	}

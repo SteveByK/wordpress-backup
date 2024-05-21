@@ -611,8 +611,8 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 		$missing_author = empty( $prepared_comment['user_id'] )
 			&& empty( $prepared_comment['comment_author'] )
 			&& empty( $prepared_comment['comment_author_email'] )
-			&& empty( $prepared_comment['comment_author_url'] );
-
+			&& empty( $prepared_comment['comment_author_url'] )
+			&& empty( $prepared_comment['comment_author_tel'] ); //tel 新規
 		if ( is_user_logged_in() && $missing_author ) {
 			$user = wp_get_current_user();
 
@@ -620,6 +620,8 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 			$prepared_comment['comment_author']       = $user->display_name;
 			$prepared_comment['comment_author_email'] = $user->user_email;
 			$prepared_comment['comment_author_url']   = $user->user_url;
+			//tel add
+			$prepared_comment['comment_author_tel']   = $user->user_tel;
 		}
 
 		// Honor the discussion setting that requires a name and email address of the comment author.
@@ -639,6 +641,10 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 
 		if ( ! isset( $prepared_comment['comment_author_url'] ) ) {
 			$prepared_comment['comment_author_url'] = '';
+		}
+		//tel
+		if ( ! isset( $prepared_comment['comment_author_tel'] ) ) {
+			$prepared_comment['comment_author_tel'] = '';
 		}
 
 		if ( ! isset( $prepared_comment['comment_agent'] ) ) {
@@ -1071,6 +1077,10 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 		if ( in_array( 'author_url', $fields, true ) ) {
 			$data['author_url'] = $comment->comment_author_url;
 		}
+		//tel add
+		if ( in_array( 'author_tel', $fields, true ) ) {
+			$data['author_tel'] = $comment->comment_author_tel;
+		}
 
 		if ( in_array( 'author_ip', $fields, true ) ) {
 			$data['author_ip'] = $comment->comment_author_IP;
@@ -1310,6 +1320,7 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 				$prepared_comment['comment_author']       = $user->display_name;
 				$prepared_comment['comment_author_email'] = $user->user_email;
 				$prepared_comment['comment_author_url']   = $user->user_url;
+				$prepared_comment['comment_author_tel']   = $user->user_tel; //tel 新規
 			} else {
 				return new WP_Error(
 					'rest_comment_author_invalid',
@@ -1326,6 +1337,10 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 		if ( isset( $request['author_email'] ) ) {
 			$prepared_comment['comment_author_email'] = $request['author_email'];
 		}
+		//tel add
+		if ( isset( $request['author_tel'] ) ) {
+			$prepared_comment['comment_author_tel'] = $request['author_tel'];
+		}
 
 		if ( isset( $request['author_url'] ) ) {
 			$prepared_comment['comment_author_url'] = $request['author_url'];
@@ -1336,7 +1351,7 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 		} elseif ( ! empty( $_SERVER['REMOTE_ADDR'] ) && rest_is_ip_address( $_SERVER['REMOTE_ADDR'] ) ) {
 			$prepared_comment['comment_author_IP'] = $_SERVER['REMOTE_ADDR'];
 		} else {
-			$prepared_comment['comment_author_IP'] = '127.0.0.1';
+			$prepared_comment['comment_author_IP'] = '127.0.0.1'; //localhost
 		}
 
 		if ( ! empty( $request['author_user_agent'] ) ) {
@@ -1430,6 +1445,14 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit', 'embed' ),
 				),
+				//tel add
+				'author_tel'        => array(
+					'description' => __( 'TELEPONE for the comment author.' ),
+					'type'        => 'string',
+					//'format'      => 'uri',
+					'context'     => array( 'view', 'edit', 'embed' ),
+				),
+				//add tel ---format   context
 				'author_user_agent' => array(
 					'description' => __( 'User agent for the comment author.' ),
 					'type'        => 'string',
@@ -1894,6 +1917,7 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 				'comment_author'       => null,
 				'comment_author_email' => null,
 				'comment_author_url'   => null,
+				'comment_author_tel'   => null, //tel add
 				'comment_parent'       => 0,
 				'user_id'              => 0,
 			)

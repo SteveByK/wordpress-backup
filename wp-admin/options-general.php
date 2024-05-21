@@ -227,6 +227,11 @@ if ( ! is_multisite() ) {
 </tr>
 
 <tr>
+<th scope="row"><label for="siteurladd1"><?php echo "這是一個測試項目"; ?></label></th>
+<td><input name="siteurladd1" type="text" id="siteurladd1" value="what are u doing?" class="add1<?php echo "add1-test"; ?>" /></td>
+</tr>
+
+<tr>
 <th scope="row"><label for="home"><?php _e( 'Site Address (URL)' ); ?></label></th>
 <td><input name="home" type="url" id="home" aria-describedby="home-description" value="<?php form_option( 'home' ); ?>"<?php disabled( defined( 'WP_HOME' ) ); ?> class="regular-text code<?php echo $wp_home_class; ?>" />
 	<?php if ( ! defined( 'WP_HOME' ) ) : ?>

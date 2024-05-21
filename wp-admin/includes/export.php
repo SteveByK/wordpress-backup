@@ -686,6 +686,9 @@ function export_wp( $args = array() ) {
 			<wp:comment_author><?php echo wxr_cdata( $c->comment_author ); ?></wp:comment_author>
 			<wp:comment_author_email><?php echo wxr_cdata( $c->comment_author_email ); ?></wp:comment_author_email>
 			<wp:comment_author_url><?php echo sanitize_url( $c->comment_author_url ); ?></wp:comment_author_url>
+			//新規入力tel
+			<wp:comment_author_tel><?php echo sanitize_url( $c->comment_author_tel ); ?></wp:comment_author_tel>
+			//新規入力tel
 			<wp:comment_author_IP><?php echo wxr_cdata( $c->comment_author_IP ); ?></wp:comment_author_IP>
 			<wp:comment_date><?php echo wxr_cdata( $c->comment_date ); ?></wp:comment_date>
 			<wp:comment_date_gmt><?php echo wxr_cdata( $c->comment_date_gmt ); ?></wp:comment_date_gmt>

@@ -9,6 +9,7 @@ if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 	$protocol = $_SERVER['SERVER_PROTOCOL'];
 	if ( ! in_array( $protocol, array( 'HTTP/1.1', 'HTTP/2', 'HTTP/2.0', 'HTTP/3' ), true ) ) {
 		$protocol = 'HTTP/1.0';
+		
 	}
 
 	header( 'Allow: POST' );
@@ -45,7 +46,7 @@ $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
 /**
  * Fires after comment cookies are set.
  *
- * @since 3.4.0
+ * @since 3.4.0WordPress Address 
  * @since 4.9.6 The `$cookies_consent` parameter was added.
  *
  * @param WP_Comment $comment         Comment object.

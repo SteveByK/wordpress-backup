@@ -369,6 +369,34 @@ function get_comment_author_url( $comment_id = 0 ) {
 	return apply_filters( 'get_comment_author_url', $comment_author_url, $comment_id, $comment );
 }
 
+//tel get function add
+function get_comment_author_tel( $comment_id = 0 ) {
+	$comment = get_comment( $comment_id );
+
+	$comment_author_tel = '';
+	$comment_id         = 0;
+
+	if ( ! empty( $comment ) ) {
+		$comment_author_tel = ( '81' === $comment->comment_author_tel ) ? '' : $comment->comment_author_tel;
+		$comment_author_tel = esc_url( $comment_author_tel );
+
+		$comment_id = $comment->comment_ID;
+	}
+
+	/**
+	 * Filters the comment author's URL.
+	 *
+	 * @since 1.5.0
+	 * @since 4.1.0 The `$comment_id` and `$comment` parameters were added.
+	 *
+	 * @param string          $comment_author_url The comment author's URL, or an empty string.
+	 * @param string|int      $comment_id         The comment ID as a numeric string, or 0 if not found.
+	 * @param WP_Comment|null $comment            The comment object, or null if not found.
+	 */
+	return apply_filters( 'get_comment_author_tel', $comment_author_tel, $comment_id, $comment );
+}
+//gettel  function add  end
+
 /**
  * Displays the URL of the author of the current comment, not linked.
  *
@@ -2544,6 +2572,20 @@ function comment_form( $args = array(), $post = null ) {
 				esc_attr( $commenter['comment_author_url'] )
 			)
 		),
+		//20240517新規入力　電話番号start
+		// 'tel'    => sprintf(
+		// 	'<p class="comment-form-tel">%s %s</p>',
+		// 	sprintf(
+		// 		'<label for="tel">%s</label>',
+		// 		__( 'telephone' )
+		// 	),
+		// 	sprintf(
+		// 		'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
+		// 		( $html5 ? 'type="tel"' : 'type="text"' ),
+		// 		esc_attr( $commenter['comment_author_tel'] )
+		// 	)
+		// ),
+		//20240517新規入力　電話番号end
 	);
 
 	if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {

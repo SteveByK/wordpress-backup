@@ -10,7 +10,7 @@
 require_once __DIR__ . '/admin.php';
 if ( ! current_user_can( 'edit_posts' ) ) {
 	wp_die(
-		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
+		'<h1>' . __( 'You need a higher level of permission你需要更高的权限才可以！！.' ) . '</h1>' .
 		'<p>' . __( 'Sorry, you are not allowed to edit comments.' ) . '</p>',
 		403
 	);
@@ -393,7 +393,7 @@ if ( isset( $_REQUEST['approved'] )
 			if ( $comment ) {
 				switch ( $comment->comment_approved ) {
 					case '1':
-						$messages[] = __( 'This comment is already approved.' ) . sprintf(
+						$messages[] = __( 'This comment is already approved!!!!!.' ) . sprintf(
 							' <a href="%1$s">%2$s</a>',
 							esc_url( admin_url( "comment.php?action=editcomment&c=$same" ) ),
 							__( 'Edit comment' )
