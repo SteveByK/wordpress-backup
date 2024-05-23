@@ -2603,6 +2603,7 @@ function wp_update_comment( $commentarr, $wp_error = false ) {
 		'comment_author',
 		'comment_author_email',
 		'comment_author_url',
+		'comment_author_tel', //0523 tel新規
 		'comment_author_IP',
 		'comment_date',
 		'comment_date_gmt',
@@ -3504,6 +3505,10 @@ function wp_handle_comment_submission( $comment_data ) {
 	if ( isset( $comment_data['url'] ) && is_string( $comment_data['url'] ) ) {
 		$comment_author_url = trim( $comment_data['url'] );
 	}
+	//tel 新規
+	if ( isset( $comment_data['tel'] ) && is_string( $comment_data['tel'] ) ) {
+		$comment_author_url = trim( $comment_data['tel'] );
+	}
 	if ( isset( $comment_data['comment'] ) && is_string( $comment_data['comment'] ) ) {
 		$comment_content = trim( $comment_data['comment'] );
 	}
@@ -3759,6 +3764,8 @@ function wp_comments_personal_data_exporter( $email_address, $page = 1 ) {
 		'comment_author'       => __( 'Comment Author' ),
 		'comment_author_email' => __( 'Comment Author Email' ),
 		'comment_author_url'   => __( 'Comment Author URL' ),
+		// TEL　新規
+		'comment_author_tel'   => __( 'Comment Author TEL' ),
 		'comment_author_IP'    => __( 'Comment Author IP' ),
 		'comment_agent'        => __( 'Comment Author User Agent' ),
 		'comment_date'         => __( 'Comment Date' ),
@@ -3776,6 +3783,8 @@ function wp_comments_personal_data_exporter( $email_address, $page = 1 ) {
 				case 'comment_author':
 				case 'comment_author_email':
 				case 'comment_author_url':
+				//tel add up
+				case 'comment_author_tel':
 				case 'comment_author_IP':
 				case 'comment_agent':
 				case 'comment_date':
@@ -3896,6 +3905,8 @@ function wp_comments_personal_data_eraser( $email_address, $page = 1 ) {
 		$anonymized_comment['comment_author_email'] = '';
 		$anonymized_comment['comment_author_IP']    = wp_privacy_anonymize_data( 'ip', $comment->comment_author_IP );
 		$anonymized_comment['comment_author_url']   = '';
+		//tel add up
+		$anonymized_comment['comment_author_tel']   = '';
 		$anonymized_comment['user_id']              = 0;
 
 		$comment_id = (int) $comment->comment_ID;
