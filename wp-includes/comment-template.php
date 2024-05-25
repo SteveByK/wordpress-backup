@@ -2510,7 +2510,7 @@ function comment_form( $args = array(), $post = null ) {
 
 		return;
 	}
-
+	
 	$post_id       = $post->ID;
 	$commenter     = wp_get_current_commenter();
 	$user          = wp_get_current_user();
@@ -2573,18 +2573,23 @@ function comment_form( $args = array(), $post = null ) {
 			)
 		),
 		//20240517新規入力　電話番号start
-		// 'tel'    => sprintf(
-		// 	'<p class="comment-form-tel">%s %s</p>',
-			// sprintf(
-			// 	'<label for="tel">%s</label>',
-			// 	__( 'telephone' )
-			// ),
-			// sprintf(
-			// 	'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
-			// 	( $html5 ? 'type="tel"' : 'type="text"' ),
-			// 	esc_attr( $commenter['comment_author_tel'] )
-			// )
-		    // ),
+		'tel'    => sprintf(
+			'<p class="comment-form-tel">%s %s</p>',
+			sprintf(
+				'<label for="tel">%s</label>',
+				__( 'telephone' )
+			),
+			sprintf(
+				'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
+				( $html5 ? 'type="tel"' : 'type="text"' ),
+				esc_attr( $commenter['comment_author_tel'] )
+			),
+			sprintf(
+				'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
+				( $html5 ? 'type="tel"' : 'type="text"' ),
+				esc_attr( $commenter['comment_author_tel'] )
+			)
+		    ),
 		//20240517新規入力　電話番号end
 	);
 

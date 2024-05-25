@@ -104,7 +104,7 @@ CREATE TABLE $wpdb->comments (
 	comment_author tinytext NOT NULL,
 	comment_author_email varchar(100) NOT NULL default '',
 	comment_author_url varchar(200) NOT NULL default '',
-	comment_author_url int(11) NOT NULL default '',  /* tel新規DBで入力*/
+	comment_author_tel int(11) NOT NULL default '',  /* tel新規DBで入力*/
 	comment_author_IP varchar(100) NOT NULL default '',
 	/* default delete
 	comment_date datetime NOT NULL default '0000-00-00 00:00:00',
