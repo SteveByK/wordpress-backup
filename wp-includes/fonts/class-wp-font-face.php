@@ -24,7 +24,7 @@ class WP_Font_Face {
 	private $font_face_property_defaults = array(
 		'font-family'  => '',
 		'font-style'   => 'normal',
-		'font-weight'  => '400',
+		'font-weight'  => '200',
 		'font-display' => 'fallback',
 	);
 

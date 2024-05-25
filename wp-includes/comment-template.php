@@ -2580,15 +2580,11 @@ function comment_form( $args = array(), $post = null ) {
 				__( 'telephone' )
 			),
 			sprintf(
-				'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
+				'<input id="tel" name="tel" %s value="%s" size="11" maxlength="20" autocomplete="0" />',
 				( $html5 ? 'type="tel"' : 'type="text"' ),
 				esc_attr( $commenter['comment_author_tel'] )
 			),
-			sprintf(
-				'<input id="tel" name="tel" %s value="%s" size="15" maxlength="100" autocomplete="0"%s />',
-				( $html5 ? 'type="tel"' : 'type="text"' ),
-				esc_attr( $commenter['comment_author_tel'] )
-			)
+			
 		    ),
 		//20240517新規入力　電話番号end
 	);
