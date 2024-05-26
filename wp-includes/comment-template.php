@@ -2537,7 +2537,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-form-author">%s %s</p>',
 			sprintf(
 				'<label for="author">%s%s</label>',
-				__( 'Name' ),
+				__( '𖧀お前は誰🧐ⶆ' ),
 				( $req ? $required_indicator : '' )
 			),
 			sprintf(
@@ -2550,7 +2550,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-form-email">%s %s</p>',
 			sprintf(
 				'<label for="email">%s%s</label>',
-				__( 'Email' ),
+				__( '⭅🤡伊妹儿🤡⭆' ),
 				( $req ? $required_indicator : '' )
 			),
 			sprintf(
@@ -2564,7 +2564,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-form-url">%s %s</p>',
 			sprintf(
 				'<label for="url">%s</label>',
-				__( 'Website' )
+				__( '↑👅Website👅↓' )
 			),
 			sprintf(
 				'<input id="url" name="url" %s value="%s" size="30" maxlength="200" autocomplete="url" />',
@@ -2577,10 +2577,10 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-form-tel">%s %s</p>',
 			sprintf(
 				'<label for="tel">%s</label>',
-				__( 'telephone' )
+				__( '🥰電話番号🥰' )
 			),
 			sprintf(
-				'<input id="tel" name="tel" %s value="%s" size="11" maxlength="20" autocomplete="0" />',
+				'<input id="tel" name="tel" %s value="%s" size="11" maxlength="11" autocomplete="0123456789" />',
 				( $html5 ? 'type="tel"' : 'type="text"' ),
 				esc_attr( $commenter['comment_author_tel'] )
 			),
@@ -2621,12 +2621,21 @@ function comment_form( $args = array(), $post = null ) {
 
 	$defaults = array(
 		'fields'               => $fields,
+		//20240525  新添加性别选择check按钮
+		'sex'        => sprintf(
+			'<p class="comment-form-sex">%s %s</p>',
+			sprintf(
+				'<label for="comment-sex">%s</label>',
+				_x( '👎👎👎性別👎👎👎', 'noun' )
+		  ),
+			'<textarea id="comment-sex" name="comment-sex" cols="45" rows="2" maxlength="2"' . $required_attribute . '></textarea>'
+		),
 
 		'comment_field'        => sprintf(
 			'<p class="comment-form-comment">%s %s</p>',
 			sprintf(
 				'<label for="comment">%s%s</label>',
-				_x( 'Comment', 'noun' ),
+				_x( '👎👎👎Comment👎👎👎', 'noun' ),
 				$required_indicator
 			),
 			'<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525"' . $required_attribute . '></textarea>'
@@ -2636,7 +2645,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="must-log-in">%s</p>',
 			sprintf(
 				/* translators: %s: Login URL. */
-				__( 'You must be <a href="%s">logged in</a> to post a comment.' ),
+				__( '🤜🫵👄今お前はまだまだです👄👎🤛 <a href="%s">logged in</a> コメントを追加することはダメです🥸。' ),
 				/** This filter is documented in wp-includes/link-template.php */
 				wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ), $post_id ) )
 			)
@@ -2657,7 +2666,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-notes">%s%s</p>',
 			sprintf(
 				'<span id="email-notes">%s</span>',
-				__( 'Your email address will not be published.' )
+				__( '如果我是DJ，你会爱我吗？.' )
 			),
 			$required_text
 		),
@@ -2677,7 +2686,7 @@ function comment_form( $args = array(), $post = null ) {
 		'cancel_reply_before'  => ' <small>',
 		'cancel_reply_after'   => '</small>',
 		'cancel_reply_link'    => __( 'Cancel reply' ),
-		'label_submit'         => __( 'Post Comment' ),
+		'label_submit'         => __( 'Click this to submit' ),
 		'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',
 		'submit_field'         => '<p class="form-submit">%1$s %2$s</p>',
 		'format'               => 'xhtml',

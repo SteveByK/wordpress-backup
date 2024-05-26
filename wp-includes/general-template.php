@@ -5168,7 +5168,8 @@ function __checked_selected_helper( $helper, $current, $display, $type ) { // ph
  */
 function wp_required_field_indicator() {
 	/* translators: Character to identify required form fields. */
-	$glyph     = __( '*' );
+	//$glyph     = __( '*' );☯☯☯☹☻☼✪♨♗☢●▶
+    $glyph     = __( '☛♡♥✡❤✦✪☚' );
 	$indicator = '<span class="required">' . esc_html( $glyph ) . '</span>';
 
 	/**
@@ -5188,11 +5189,12 @@ function wp_required_field_indicator() {
  *
  * @return string Message text and glyph wrapped in a `span` tag.
  */
+//comment页面，comment输入框上方的标语
 function wp_required_field_message() {
 	$message = sprintf(
 		'<span class="required-field-message">%s</span>',
 		/* translators: %s: Asterisk symbol (*). */
-		sprintf( __( 'Required fields are marked %s' ), wp_required_field_indicator() )
+		sprintf( __( 'もし俺はベテラン、付き合ってくれないの? %s' ), wp_required_field_indicator() )
 	);
 
 	/**

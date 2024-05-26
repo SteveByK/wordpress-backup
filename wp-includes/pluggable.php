@@ -1269,6 +1269,7 @@ if ( ! function_exists( 'check_admin_referer' ) ) :
 	 *                   2 if the nonce is valid and generated between 12-24 hours ago.
 	 *                   False if the nonce is invalid.
 	 */
+	//进入check_admin_referer，这里还会传入一个当前行为的属性，
 	function check_admin_referer( $action = -1, $query_arg = '_wpnonce' ) {
 		if ( -1 === $action ) {
 			_doing_it_wrong( __FUNCTION__, __( 'You should specify an action to be verified by using the first parameter.' ), '3.2.0' );

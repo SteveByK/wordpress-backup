@@ -91,7 +91,7 @@ if ( is_wp_error( $is_valid ) ) {
 
 if ( wp_is_site_protected_by_basic_auth( 'front' ) ) {
 	wp_die(
-		__( 'Your website appears to use Basic Authentication, which is not currently compatible with application passwords.' ),
+		__( 'Your website appears to use Basic Authentication, which is not currently compatible with application passwords!!.' ),
 		__( 'Cannot Authorize Application' ),
 		array(
 			'response'  => 501,
@@ -320,7 +320,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 							'<strong><code>' . esc_html( $reject_url ) . '</code></strong>'
 						);
 					} else {
-						_e( 'You will be returned to the WordPress Dashboard, and no changes will be made.' );
+						_e( 'You will be returned to the WordPress Dashboard, and no changes will be made!!!!!.' );
 					}
 					?>
 				</p>

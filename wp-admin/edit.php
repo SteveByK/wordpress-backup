@@ -74,7 +74,8 @@ if ( 'post' !== $post_type ) {
 $doaction = $wp_list_table->current_action();
 
 if ( $doaction ) {
-	check_admin_referer( 'bulk-posts' );
+	//notes 20250526
+	check_admin_referer( 'bulk-posts' );//出于防御csrf攻击的目的，wordpress引入了nonce安全机制，只有请求中_wpnonce和预期相等，请求才会被处理。
 
 	$sendback = remove_query_arg( array( 'trashed', 'untrashed', 'deleted', 'locked', 'ids' ), wp_get_referer() );
 	if ( ! $sendback ) {
