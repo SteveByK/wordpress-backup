@@ -2533,6 +2533,54 @@ function comment_form( $args = array(), $post = null ) {
 	$required_text      = ' ' . wp_required_field_message();
 
 	$fields = array(
+		//sex add
+		'sex' => sprintf(
+	// 	'<div class="form__group">
+    //     <div class="form__group-title">
+    //       <span class="form__label--item">性別</span>
+    //       <span class="form__label--required">※</span>
+		
+    //     </div>
+    //     <div class="form__group-content">
+    //       <div class="form__input--radio">
+    //           <input id="men" type="radio" name="gender" value="1" checked>
+    //           <label for="men" name="gender2" value="男性">♂真男人</label>
+    //           <input id="women" type="radio" name="gender" value="2">
+    //           <label for="women" name="gender2" value="女性">♀小女人</label>
+    //       </div>
+    //     </div>
+    //   </div>'
+
+// 	'<div class="form__group">
+// 	<div class="form__group-title">
+// 	  <span class="form__label--item">性別</span>
+// 	  <span class="form__label--required">※</span>
+// 	</div>
+// 	<div class="form__group-content">
+// 	  <div class="form__input--radio">
+// 		<input id="men" type="radio" name="gender" value="0" checked>
+// 		<label for="men">♂真男人</label>
+// 		<input id="women" type="radio" name="gender" value="1">
+// 		<label for="women">♀小女子</label>
+// 	  </div>
+// 	</div>
+//   </div>'
+		  '<p class="comment-form-sex01">%s %s</p>',
+		  sprintf(
+		   '<input type="radio" name="gender" value="male">♂男性
+			<input type="radio" name="gender" value="female">♀女性 ',
+		),
+		  sprintf(
+				'<label for="sex">%s %s</label>',
+				__( '🥰SEX🥰' ),
+				__( '𖧀🧐ⶆ' ),
+			),
+			
+			( $req ? $required_indicator : '' )
+		  ),
+		
+	
+		//sex add 
 		'author' => sprintf(
 			'<p class="comment-form-author">%s %s</p>',
 			sprintf(
@@ -2622,14 +2670,17 @@ function comment_form( $args = array(), $post = null ) {
 	$defaults = array(
 		'fields'               => $fields,
 		//20240525  新添加性别选择check按钮
-		'sex'        => sprintf(
-			'<p class="comment-form-sex">%s %s</p>',
-			sprintf(
-				'<label for="comment-sex">%s</label>',
-				_x( '👎👎👎性別👎👎👎', 'noun' )
-		  ),
-			'<textarea id="comment-sex" name="comment-sex" cols="45" rows="2" maxlength="2"' . $required_attribute . '></textarea>'
-		),
+		// 'sex'        => sprintf(
+		// 	'<p class="comment-form-sex">%s %s</p>',
+		// 	sprintf(
+		// 		'<label for="comment-sex">%s</label>',
+		// 		_x( '👎👎👎性別👎👎👎', 'noun' )
+		// 	),
+		// 	'<select id="comment-sex" name="comment-sex"' . $required_attribute . '>
+		// 		<option value="male">男</option>
+		// 		<option value="female">女</option>
+		// 	</select>'
+		// ),
 
 		'comment_field'        => sprintf(
 			'<p class="comment-form-comment">%s %s</p>',
@@ -2666,7 +2717,7 @@ function comment_form( $args = array(), $post = null ) {
 			'<p class="comment-notes">%s%s</p>',
 			sprintf(
 				'<span id="email-notes">%s</span>',
-				__( '如果我是DJ，你会爱我吗？.' )
+				__( '俺は全世界一番強い男.' )
 			),
 			$required_text
 		),
@@ -2674,21 +2725,28 @@ function comment_form( $args = array(), $post = null ) {
 		'action'               => site_url( '/wp-comments-post.php' ),
 		'id_form'              => 'commentform',
 		'id_submit'            => 'submit',
+		'id_delete'            => 'delete',
 		'class_container'      => 'comment-respond',
 		'class_form'           => 'comment-form',
 		'class_submit'         => 'submit',
 		'name_submit'          => 'submit',
-		'title_reply'          => __( 'Leave a Reply' ),
+		'class_delete'         => 'delete',
+		'name_delete'          => 'delete',
+		'title_reply'          => __( 'コメントを書いてください!!' ),
 		/* translators: %s: Author of the comment being replied to. */
-		'title_reply_to'       => __( 'Leave a Reply to %s' ),
+		'title_reply_to'       => __( 'コメントを書いてください、馬鹿野郎!! %s' ),
 		'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title">',
 		'title_reply_after'    => '</h3>',
 		'cancel_reply_before'  => ' <small>',
 		'cancel_reply_after'   => '</small>',
 		'cancel_reply_link'    => __( 'Cancel reply' ),
-		'label_submit'         => __( 'Click this to submit' ),
+		'label_submit'         => __( '𖣔Click this to submit 𖣔' ),
 		'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',
 		'submit_field'         => '<p class="form-submit">%1$s %2$s</p>',
+		//20240527 delete button add
+		'label_delete'         => __( '𖣔Click this to delete 𖣔' ),
+		 'delete_button'        => '<input name="deletebutton" type="submit" id="deletebutton" class="deletebutton" value="0" />',
+		 'delete_field'         => '<p class="form-delete"></p>',
 		'format'               => 'xhtml',
 	);
 
@@ -2883,6 +2941,15 @@ function comment_form( $args = array(), $post = null ) {
 				esc_attr( $args['label_submit'] )
 			);
 
+			//0527
+			// $delete_button = sprintf(
+			// 	$args['delete_button'],
+			// 	esc_attr( $args['name_delete'] ),
+			// 	esc_attr( $args['id_delete'] ),
+			// 	esc_attr( $args['class_delete'] ),
+			// 	esc_attr( $args['label_delete'] )
+			// );
+
 			/**
 			 * Filters the submit button for the comment form to display.
 			 *
@@ -2892,12 +2959,21 @@ function comment_form( $args = array(), $post = null ) {
 			 * @param array  $args          Arguments passed to comment_form().
 			 */
 			$submit_button = apply_filters( 'comment_form_submit_button', $submit_button, $args );
+			//20240527
+			//$delete_button = apply_filters( 'comment_form_delete_button', $submit_button, $args );
 
 			$submit_field = sprintf(
 				$args['submit_field'],
 				$submit_button,
 				get_comment_id_fields( $post_id )
 			);
+
+			//20240527
+			// $delete_field = sprintf(
+			// 	$args['delete_field'],
+			// 	$delete_button,
+			// 	get_comment_id_fields( $post_id )
+			// );
 
 			/**
 			 * Filters the submit field for the comment form to display.

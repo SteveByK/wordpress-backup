@@ -1229,6 +1229,8 @@ function wp_get_comment_fields_max_lengths() {
 		'comment_author'       => 245,
 		'comment_author_email' => 100,
 		'comment_author_url'   => 200,
+		//20240527 tel add input max 
+		'comment_author_tel'   => 11,
 		'comment_content'      => 65525,
 	);
 
